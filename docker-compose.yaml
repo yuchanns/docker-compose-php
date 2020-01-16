@@ -41,7 +41,6 @@ services:
     ports:
       - '6379:6379'
     volumes:
-      - ./redis:/var/lib/redis
       - ./web:/web
     networks:
       - code-network
