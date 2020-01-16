@@ -1,0 +1,50 @@
+version: '3'
+services:
+  nginx:
+    restart: always
+    build:
+      dockerfile: dockerfile
+      context: ./nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./web:/web
+    networks:
+      - code-network
+  php-fpm:
+    restart: on-failure
+    build:
+      dockerfile: dockerfile
+      context: ./php
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./web:/web
+    networks:
+      - code-network
+  mysql:
+    image: mysql:5.7
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./web:/web
+    environment:
+      MYSQL_DATABSE: test_saas
+      MYSQL_USER: test
+      MYSQL_PASSWORD: 123456789
+      MYSQL_ROOT_PASSWORD: 123456789
+    networks:
+      - code-network
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./redis:/var/lib/redis
+      - ./web:/web
+    networks:
+      - code-network
+networks:
+  code-network:
+    driver: bridge
