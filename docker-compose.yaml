@@ -9,6 +9,7 @@ services:
       - '80:80'
     volumes:
       - ./web:/web
+      - ./nginx/conf.d:/etc/nginx/conf.d
     networks:
       - code-network
   php-fpm:
@@ -30,10 +31,7 @@ services:
       - ./mysql:/var/lib/mysql
       - ./web:/web
     environment:
-      MYSQL_DATABSE: test_saas
-      MYSQL_USER: test
-      MYSQL_PASSWORD: 123456789
-      MYSQL_ROOT_PASSWORD: 123456789
+      MYSQL_ROOT_PASSWORD: JoKwlar0JtOTZFL5
     networks:
       - code-network
   redis:
