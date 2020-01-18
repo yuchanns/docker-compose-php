@@ -4,6 +4,8 @@ WORKDIR /www
 
 ENV TZ=Asia/Shanghai
 
+COPY install.sh .
+
 RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g" /etc/apk/repositories \
     && apk update && apk add --no-cache \
         libpng-dev make gcc musl-dev \
@@ -18,7 +20,12 @@ RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g" /etc/apk/repositories
     && ./composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
 	&& wget http://static.tjx.be/vim-vide.tgz && tar xvf ./vim-vide.tgz -C /root \
 	&& apk del make gcc musl-dev g++ zlib-dev autoconf libpng-dev \
-	&& rm vim-vide.tgz
+	&& rm vim-vide.tgz \
+	&& git config --global user.email "airamusume@gmail.com" \
+	&& git config --global user.name "yuchanns" \
+	&& sh -c ./install.sh
+	
+COPY ./.zshrc /root/
 
 EXPOSE 9000
 
