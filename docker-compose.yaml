@@ -1,6 +1,7 @@
 version: '3'
 services:
   nginx:
+    container_name: nginx
     restart: always
     build:
       dockerfile: dockerfile
@@ -13,6 +14,7 @@ services:
     networks:
       - code-network
   php-fpm:
+    container_name: php-fpm
     restart: on-failure
     build:
       dockerfile: dockerfile
@@ -24,6 +26,7 @@ services:
     networks:
       - code-network
   mysql:
+    container_name: mysql
     image: mysql:5.7
     ports:
       - '3306:3306'
@@ -35,6 +38,7 @@ services:
     networks:
       - code-network
   redis:
+    container_name: redis
     image: redis:latest
     ports:
       - '6379:6379'
