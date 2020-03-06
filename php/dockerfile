@@ -18,6 +18,8 @@ RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g" /etc/apk/repositories
     && rm composer-setup.php \
     && mv composer.phar composer \
     && ./composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
+    && docker-php-ext-install -j$(nproc) gd bcmath sockets zip pdo_mysql \
+	&& pecl install imagick redis && docker-php-ext-enable redis imagick \
 	&& wget http://static.tjx.be/vim-vide.tgz && tar xvf ./vim-vide.tgz -C /root \
 	&& apk del make gcc musl-dev g++ zlib-dev autoconf libpng-dev \
 	&& rm vim-vide.tgz \
