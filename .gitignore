@@ -1,1 +1,8 @@
 .DS_Store
+mysql/*
+nginx/*
+!mysql/.gitkeep
+!nginx/dockerfile
+!nginx/conf.d/default.conf
+web/*
+!web/index.php
