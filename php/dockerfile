@@ -6,7 +6,7 @@ ENV TZ=Asia/Shanghai
 
 RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g" /etc/apk/repositories \
     && apk update && apk add --no-cache \
-        libpng-dev make gcc musl-dev \
+        libpng-dev make gcc musl-dev openssh-server openssh \
 		g++ zlib-dev imagemagick imagemagick-dev \
 		autoconf bash vim git wget zsh \
     && docker-php-ext-install -j$(nproc) gd bcmath sockets zip pdo_mysql pcntl \
