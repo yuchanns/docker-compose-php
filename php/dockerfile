@@ -4,9 +4,7 @@ WORKDIR /www
 
 ENV TZ=Asia/Shanghai
 
-COPY install.sh .
-
-RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g" /etc/apk/repositories \
+RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g" /etc/apk/repositories \
     && apk update && apk add --no-cache \
         libpng-dev make gcc musl-dev \
 		g++ zlib-dev imagemagick imagemagick-dev \
@@ -24,9 +22,8 @@ RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g" /etc/apk/repositories
 	&& apk del make gcc musl-dev g++ zlib-dev autoconf libpng-dev \
 	&& rm vim-vide.tgz \
 	&& git config --global user.email "airamusume@gmail.com" \
-	&& git config --global user.name "yuchanns" \
-	&& sh -c ./install.sh
-	
+	&& git config --global user.name "yuchanns"
+
 COPY ./.zshrc /root/
 
 EXPOSE 9000
